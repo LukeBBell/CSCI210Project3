@@ -55,11 +55,11 @@ int main() {
 	argv[argc] = NULL;
 	if (argc == 0) continue;
 	if (isAllowed(line) == 1) {
-		if (strcmp(cmd,"cd") == 0) {
+		if (strcmp(argv[0],"cd") == 0) {
 			chdir(argv[1]);
-		} else if (strcmp(cmd,"exit") == 0) {
+		} else if (strcmp(argv[0],"exit") == 0) {
 			exit(0);
-		} else if (strcmp(cmd,"help") == 0) {
+		} else if (strcmp(argv[0],"help") == 0) {
 			printf("The allowed commands are:\n1: cp\n2: touch\n3:mkdir\n4:ls\n5: pwd\n6: cat\n7: grep\n8:chmod\n9: diff\n10: cd\n11: exit\n12:help");
 		} else {
 			pid_t pid;
