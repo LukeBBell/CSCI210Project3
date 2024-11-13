@@ -55,6 +55,10 @@ int main() {
 	if (argc == 0) continue;
 	if (isAllowed(line) == 1) {
 		if (strcmp(line,"cd") == 0) {
+			if (argc > 1) {
+				printf("-rsh: cd: too many arguments\n");
+				continue;
+			}
 			chdir(argv[1]);
 		} else if (strcmp(line,"exit") == 0) {
 			exit(0);
