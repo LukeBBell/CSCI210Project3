@@ -79,6 +79,7 @@ int main() {
 				perror("waitpid failed");
 				exit(EXIT_FAILURE);
 			}
+			posix_spawnattr_destroy(&attr);
 		}	
 	} else {
 		printf("NOT ALLOWED!");
