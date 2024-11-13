@@ -29,7 +29,6 @@ int main() {
     // Add variables as needed
 
     char line[256];
-    char *argv[20];
     char* cmd;
     int argc;
     int status;
@@ -37,7 +36,7 @@ int main() {
     posix_spawnattr_t attr;
     posix_spawnattr_init(&attr);
     while (1) {
-
+	char* argv[20] = {NULL};
 	fprintf(stderr,"rsh>");
 
 	if (fgets(line,256,stdin)==NULL) continue;
