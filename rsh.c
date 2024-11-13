@@ -15,7 +15,8 @@ int isAllowed(const char*cmd) {
 	// TODO
 	// return 1 if cmd is one of the allowed commands
 	// return 0 otherwise
-	for (int i = 0; i < N; i++) {
+	int len = sizeof(allowed);
+	for (int i = 0; i<= len; i++) {
 		if(strcmp(allowed[i],cmd) == 0) {
 			return 1;
 		}
@@ -30,8 +31,6 @@ int main() {
 
     char line[256];
     char *argv[20];
-    int argc;
-    char* cmd;
     while (1) {
 
 	fprintf(stderr,"rsh>");
@@ -47,32 +46,26 @@ int main() {
 	// And add code to execute cd, exit, help commands
 	// Use the example provided in myspawn.c
 	char* token = strtok(line, " ");
-	cmd = token;
-	argc = 0;
-	while (token != NULL) {
-		argc++;
-		argv[argc] = token;
+	int argc = 0;
+	while (token != NULL && argc < 20) {
+		argv[argc++] = token;
 		token = strtok(NULL, " ");
 	}
-	argv[argc+1] = NULL;
+	argv[argc] = NULL;
 	if (argc == 0) continue;
-	if (isAllowed(cmd) == 1) {
-		if (strcmp(cmd,"cd") == 0) {
-			if (argc > 1) {
-				printf("-rsh: cd: too many arguments\n");
-				continue;
-			}
+	if (isAllowed(line) == 1) {
+		if (strcmp(line,"cd") == 0) {
 			chdir(argv[1]);
-		} else if (strcmp(cmd,"exit") == 0) {
+		} else if (strcmp(line,"exit") == 0) {
 			exit(0);
-		} else if (strcmp(cmd,"help") == 0) {
+		} else if (strcmp(line,"help") == 0) {
 			printf("The allowed commands are:\n1: cp\n2: touch\n3:mkdir\n4:ls\n5: pwd\n6: cat\n7: grep\n8:chmod\n9: diff\n10: cd\n11: exit\n12:help");
 		} else {
 			pid_t pid;
 			int status;
 			posix_spawnattr_t attr;
 			posix_spawnattr_init(&attr);
-			if (posix_spawnp(&pid,cmd, NULL, &attr, argv, environ) != 0) {
+			if (posix_spawnp(&pid,argv[0], NULL, &attr, argv, environ) != 0) {
 				perror("spawn failed");
 				exit(EXIT_FAILURE);
 			}
