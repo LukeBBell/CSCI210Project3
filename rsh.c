@@ -52,6 +52,7 @@ int main() {
 	char* token = strtok(line, " ");
 	argc = 0;
 	cmd = token;
+	argv[0] = cmd;
 	token = strtok(NULL, " ");
 	while (token != NULL) {
 		argc++;
