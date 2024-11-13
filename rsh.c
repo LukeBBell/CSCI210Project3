@@ -52,23 +52,24 @@ int main() {
 	// Use the example provided in myspawn.c
 	char* token = strtok(line, " ");
 	argc = 0;
+	cmd = token;
+	token = strtok(NULL, " ");
 	while (token != NULL) {
 		argc++;
 		argv[argc] = token;
 		token = strtok(NULL, " ");
 	}
 	argv[argc + 1] = NULL;
-	cmd = argv[0];
 	if (isAllowed(cmd) == 1) {
-		if (strcmp(line,"cd") == 0) {
+		if (strcmp(cmd,"cd") == 0) {
 			if (argc > 1) {
 				printf("-rsh: cd: too many arguments\n");
 				continue;
 			}
 			chdir(argv[1]);
-		} else if (strcmp(line,"exit") == 0) {
+		} else if (strcmp(cmd,"exit") == 0) {
 			break;
-		} else if (strcmp(line,"help") == 0) {
+		} else if (strcmp(cmd,"help") == 0) {
 			printf("The allowed commands are:\n1: cp\n2: touch\n3:mkdir\n4:ls\n5: pwd\n6: cat\n7: grep\n8:chmod\n9: diff\n10: cd\n11: exit\n12:help");
 		} else {
 			if (posix_spawnp(&pid,cmd, NULL, &attr, argv, environ) != 0) {
