@@ -15,7 +15,7 @@ int isAllowed(const char*cmd) {
 	// TODO
 	// return 1 if cmd is one of the allowed commands
 	// return 0 otherwise
-	for (int i = 0; i< 12; i++) {
+	for (int i = 0; i < N; i++) {
 		if(strcmp(allowed[i],cmd) == 0) {
 			return 1;
 		}
@@ -44,7 +44,9 @@ int main() {
 	// Add code to spawn processes for the first 9 commands
 	// And add code to execute cd, exit, help commands
 	// Use the example provided in myspawn.c
-	char* token = strtok(line, " ");
+	char* linecpy = malloc(sizeof(line));
+	strcpy(linecpy, line);
+	char* token = strtok(linecpy, " ");
 	int argc = 0;
 	while (token != NULL && argc < 20) {
 		argv[argc++] = token;
