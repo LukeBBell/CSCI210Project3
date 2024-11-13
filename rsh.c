@@ -59,7 +59,7 @@ int main() {
 	}
 	argv[argc + 1] = NULL;
 	cmd = argv[0];
-	if (isAllowed(line) == 1) {
+	if (isAllowed(cmd) == 1) {
 		if (strcmp(line,"cd") == 0) {
 			if (argc > 1) {
 				printf("-rsh: cd: too many arguments\n");
