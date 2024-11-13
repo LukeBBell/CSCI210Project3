@@ -51,7 +51,7 @@ int main() {
 		argv[argc++] = token;
 		token = strtok(NULL, " ");
 	}
-	argv[argc] == NULL;
+	argv[argc] = NULL;
 	if (argc == 0) continue;
 	if (isAllowed(line) == 1) {
 		if (strcmp(line,"cd") == 0) {
@@ -72,9 +72,6 @@ int main() {
 			if (waitpid(pid,&status, 0) == -1) {
 				perror("waitpid failed");
 				exit(EXIT_FAILURE);
-			}
-			if (WIFEXITED(status)) {
-				printf("Spawned process exited with status %d\n", WEXITSTATUS(status));
 			}
 			posix_spawnattr_destroy(&attr);
 		}	
