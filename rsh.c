@@ -15,8 +15,7 @@ int isAllowed(const char*cmd) {
 	// TODO
 	// return 1 if cmd is one of the allowed commands
 	// return 0 otherwise
-	int len = sizeof(allowed);
-	for (int i = 0; i<= len; i++) {
+	for (int i = 0; i< 12; i++) {
 		if(strcmp(allowed[i],cmd) == 0) {
 			return 1;
 		}
